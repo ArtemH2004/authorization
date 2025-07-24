@@ -4,12 +4,14 @@ import { CircleProgressBar } from "@/common/components/ui/progress/CircleProgres
 
 interface DefaultInputProps {
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>["inputMode"];
   id: string;
   label: string;
   value?: string;
   placeholder: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  pattern?: string;
   required?: boolean;
   disabled?: boolean;
   autoFocus?: boolean;
@@ -26,6 +28,8 @@ export const DefaultInput = ({
   placeholder,
   onChange,
   onKeyDown,
+  inputMode,
+  pattern,
   disabled,
   autoFocus,
   error,
@@ -57,11 +61,13 @@ export const DefaultInput = ({
           }`}
           id={id}
           type={type ?? "text"}
+          inputMode={inputMode ?? "text"}
           name={label}
           value={value}
           placeholder={placeholder}
           onChange={onChange}
           onKeyDown={onKeyDown}
+          pattern={pattern}
           disabled={disabled ?? false}
           autoFocus={autoFocus}
           autoComplete={autoComplete}

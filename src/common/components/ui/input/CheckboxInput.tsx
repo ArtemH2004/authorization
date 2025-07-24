@@ -13,7 +13,7 @@ export const CheckboxInput = ({ id, title, linkTo }: CheckboxInputProps) => {
         <input className="checkbox-input--custom" id={id} type="checkbox" />
         <span className="checkbox-input__checkmark"></span>
       </label>
-      {!!linkTo && <DefaultLink title={title} linkTo={linkTo} />}
+      {!!linkTo && <DefaultLink title={title} linkTo={linkTo} newPage />}
     </div>
   );
 };

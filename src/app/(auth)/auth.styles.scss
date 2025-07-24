@@ -33,6 +33,11 @@
         font-size: var(--font-size-small);
         text-align: center;
         white-space: nowrap;
+
+        & time {
+            padding-left: 0.3rem;
+            color: var(--color-black);
+        }
     }
 
     &__description {
