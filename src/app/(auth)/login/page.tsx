@@ -5,27 +5,23 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
-import { useCallback } from "react";
 
 export default function Login() {
   const email = useInput("", validators.email);
   const password = useInput("", validators.password);
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      const emailError = email.handleCheck();
-      const passwordError = password.handleCheck();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const emailError = email.handleCheck();
+    const passwordError = password.handleCheck();
 
-      if (!emailError && !passwordError) {
-      }
-    },
-    [email, password]
-  );
+    if (!emailError && !passwordError) {
+    }
+  };
 
   return (
     <section className="auth__section">
-      <h1>Логин</h1>
+      <h1>Вход</h1>
 
       <form className="auth__form" onSubmit={handleSubmit}>
         <DefaultInput

@@ -1,5 +1,103 @@
+"use client";
+import "@/app/(auth)/auth.styles.scss";
+import { DefaultLink } from "@/common/components/ui/a/DefaultLink";
+import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
+import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
+import useInput from "@/common/hooks/useInput";
+import { InputCharLimitsEnum, validators } from "@/common/utils/validators";
+import { useEffect, useState } from "react";
+
 export default function Register() {
-    return (
-        <h1>Register</h1>
-    )
+  const name = useInput("", validators.user_name);
+  const email = useInput("", validators.email);
+  const password = useInput("", validators.password);
+  const rPassword = useInput("", validators.password);
+  const [concError, setConcError] = useState("");
+  const [isPolicy, setIsPolicy] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const nameError = name.handleCheck();
+    const emailError = email.handleCheck();
+    const passwordError = password.handleCheck();
+    const rPasswordError = rPassword.handleCheck();
+
+    if (!nameError && !emailError && !passwordError && !rPasswordError) {
+        return;
+    }
+  };
+
+  useEffect(() => {
+    if (password.value === rPassword.value) setConcError("");
+    else setConcError("Пароли не совпадают");
+  }, [rPassword]);
+
+  return (
+    <section className="auth__section">
+      <h1>Регистрация</h1>
+
+      <form className="auth__form" onSubmit={handleSubmit}>
+        <DefaultInput
+          id="user_name"
+          label="Имя пользователя"
+          placeholder="artem"
+          value={name.value}
+          onChange={name.onChange}
+          error={!!name.error}
+          maxLength={InputCharLimitsEnum.USER_NAME}
+          required
+        />
+
+        <DefaultInput
+          id="email"
+          label="Email"
+          type="email"
+          placeholder="artem@gmail.com"
+          value={email.value}
+          onChange={email.onChange}
+          error={!!email.error}
+          maxLength={InputCharLimitsEnum.EMAIL}
+          required
+        />
+
+        <DefaultInput
+          id="password"
+          label="Пароль"
+          type="password"
+          placeholder="••••••"
+          value={password.value}
+          onChange={password.onChange}
+          error={!!password.error}
+          maxLength={InputCharLimitsEnum.PASSWORD}
+          required
+        />
+
+        <DefaultInput
+          id="rPassword"
+          label="Повторите пароль"
+          type="password"
+          placeholder="••••••"
+          value={rPassword.value}
+          onChange={rPassword.onChange}
+          error={!!rPassword.error}
+          maxLength={InputCharLimitsEnum.PASSWORD}
+          required
+        />
+
+        <DefaultButton
+          title="Регистрация"
+          type="submit"
+          disabled={!!email.error || !!password.error}
+        />
+
+        {password.error && (
+          <span className="auth__error">{name.error || email.error || password.error || rPassword.error || concError}</span>
+        )}
+      </form>
+
+      <span className="auth__span">
+        Уже есть аккаунт? <DefaultLink title="Войти" linkTo="/login" />
+      </span>
+    </section>
+  );
 }
