@@ -5,6 +5,7 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
+import { routes } from "@/config/routes.config";
 import { useState, useEffect } from "react";
 
 export const ResetPassword = () => {
@@ -66,7 +67,7 @@ export const ResetPassword = () => {
         )}
       </form>
 
-      <DefaultLink title="Вернуться назад" linkTo="/login" />
+      <DefaultLink title="Вернуться назад" linkTo={routes.login} />
     </section>
   );
 }

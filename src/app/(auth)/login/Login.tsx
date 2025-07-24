@@ -5,6 +5,7 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
+import { routes } from "@/config/routes.config";
 import { useEffect, useState } from "react";
 export const Login = () => {
   const email = useInput("", validators.email);
@@ -65,7 +66,7 @@ export const Login = () => {
           required
         />
 
-        <DefaultLink title="Забыли пароль?" linkTo="/reset-password" />
+        <DefaultLink title="Забыли пароль?" linkTo={routes.resetPassword} />
 
         <DefaultButton title="Войти" type="submit" disabled={wasSubmitted} />
 
@@ -75,7 +76,7 @@ export const Login = () => {
       </form>
 
       <span className="auth__span">
-        Нет аккаунта? <DefaultLink title="Регистрация" linkTo="/register" />
+        Нет аккаунта? <DefaultLink title="Регистрация" linkTo={routes.register} />
       </span>
     </section>
   );

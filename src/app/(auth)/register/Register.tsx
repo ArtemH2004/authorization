@@ -6,6 +6,7 @@ import { CheckboxInput } from "@/common/components/ui/input/CheckboxInput";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { InputCharLimitsEnum, validators } from "@/common/utils/validators";
+import { routes } from "@/config/routes.config";
 import { useEffect, useState } from "react";
 export const Register = () => {
   const name = useInput("", validators.user_name);
@@ -112,7 +113,7 @@ export const Register = () => {
         <CheckboxInput
           id="privacy-policy"
           title="Политика Конфиденциальности"
-          linkTo="/privacy-policy"
+          linkTo={routes.privacyPolicy}
           isActive={isPolicy}
           setActive={setIsPolicy}
         />
@@ -129,7 +130,7 @@ export const Register = () => {
       </form>
 
       <span className="auth__span">
-        Уже есть аккаунт? <DefaultLink title="Войти" linkTo="/login" />
+        Уже есть аккаунт? <DefaultLink title="Войти" linkTo={routes.login} />
       </span>
     </section>
   );
