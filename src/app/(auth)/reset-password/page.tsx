@@ -6,24 +6,26 @@ import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
 
-export default function Login() {
+export default function ResetPassword() {
   const email = useInput("", validators.email);
-  const password = useInput("", validators.password);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const emailError = email.handleCheck();
-    const passwordError = password.handleCheck();
 
-    if (!emailError && !passwordError) {
+    if (!emailError) {
     }
   };
 
   return (
     <section className="auth__section">
-      <h1>Вход</h1>
+      <h1>Забыли пароль?</h1>
 
       <form className="auth__form" onSubmit={handleSubmit}>
+        <p className="auth__description">
+          Для восстановления пароля на ваш Email будет отправлен код
+        </p>
+
         <DefaultInput
           id="email"
           label="Email"
@@ -35,33 +37,16 @@ export default function Login() {
           required
         />
 
-        <DefaultInput
-          id="password"
-          label="Пароль"
-          type="password"
-          placeholder="••••••"
-          value={password.value}
-          onChange={password.onChange}
-          error={!!password.error}
-          required
-        />
-
-        <DefaultLink title="Забыли пароль?" linkTo="/reset-password" />
-
         <DefaultButton
-          title="Войти"
+          title="Отправить код"
           type="submit"
-          disabled={!!email.error || !!password.error}
+          disabled={!!email.error}
         />
 
-        {password.error && (
-          <span className="auth__error">{email.error || password.error}</span>
-        )}
+        {email.error && <span className="auth__error">{email.error}</span>}
       </form>
 
-      <span className="auth__span">
-        Нет аккаунта? <DefaultLink title="Регистрация" linkTo="/register" />
-      </span>
+      <DefaultLink title="Вернуться назад" linkTo="/login" />
     </section>
   );
 }

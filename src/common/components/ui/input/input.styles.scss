@@ -5,7 +5,7 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
-        row-gap: 0.3rem;
+        row-gap: 0.5rem;
         width: 100%;
     }
 
@@ -14,7 +14,8 @@
     }
 
     &__label {
-        margin-inline: 1rem auto;
+        font-size: var(--font-size-small);
+        margin-inline: .75rem auto;
     }
 
     &__input {
