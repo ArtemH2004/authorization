@@ -1,0 +1,58 @@
+html,
+body {
+    @include clamp-text(16, 18);
+
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-black);
+    background-color: var(--color-white);
+
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    // scrollbar-color: ${colors.grayAccent};
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+    user-select: none;
+    transition: var(--short-transition);
+}
+
+button {
+    @include reset-button;
+}
+
+a {
+    @include reset-link;
+}
+
+a:hover,
+button:hover {
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: var(--font-weight-bold);
+}
+
+h1 {
+    font-size: var(--font-size-title);
+}
+
+h2 {
+    font-size: var(--font-size-subtitle);
+}
+
+h3 {
+    font-size: var(--font-size-main);
+}
+
+h4 {
+    font-size: var(--font-size-small);
+}

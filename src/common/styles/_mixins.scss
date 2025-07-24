@@ -1,0 +1,86 @@
+@mixin clamp-text($min: 16, $max: 18) {
+    font-size: clamp(#{$min}px, #{$max / 1180 * 100}vw, #{$max}px);
+}
+
+@mixin clamp-width($min: 50, $max: 100) {
+    width: clamp(#{$min}px, #{$max / 1180 * 100}vw, #{$max}px);
+    height: auto;
+}
+
+@mixin reset-link {
+    color: inherit;
+
+    &,
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@mixin reset-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+@mixin flex-center($isInline: false) {
+    @if $isInline {
+        display: inline-flex;
+    } @else {
+        display: flex;
+    }
+
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+@mixin square($size) {
+    width: $size;
+    aspect-ratio: 1;
+}
+
+@mixin visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+}
+
+
+// @mixin scrollBar {
+//   ::-webkit-scrollbar-track {
+//     border-radius: ${borders.radius.default};
+//     background-color: ${colors.grayAccent};
+//   }
+
+//   ::-webkit-scrollbar {
+//     width: 10px;
+//     height: 10px;
+//     background-color: ${colors.grayAccent};
+//   }
+
+//   ::-webkit-scrollbar-thumb {
+//     border-radius: ${borders.radius.default};
+//     background-color: ${colors.grayScrollBar};
+
+//     &:hover {
+//       background-color: ${colors.grayScrollBarHover};
+//     }
+
+//     &:active {
+//       background-color: ${colors.grayScrollBarActive};
+//     }
+//   }
+// }

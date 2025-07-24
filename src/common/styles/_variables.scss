@@ -1,0 +1,81 @@
+:root {
+    //colors
+    --color-black: rgba(0, 0, 0, 1);
+    --color-shadow: rgba(0, 0, 0, .1);
+    --color-gray: rgba(175, 175, 175, 1);
+    --color-gray-text: rgba(131, 131, 131, 1);
+
+    --color-white: rgba(255, 255, 255, 1);
+
+    // font-family
+    --font-family: "Montserrat", sans-serif;
+
+    //container
+    --container-width: 1240px;
+    --container-padding-x: 1.25rem;
+
+    //shadows
+    --shadow-default:  0 0 1.25rem 0 var(--color-shadow);
+
+    //borders
+    --border-style-default: 1px solid var(--color-gray);
+    --border-style-black: 1px solid var(--color-black);
+
+    --border-radius-default: 1.75rem;
+    --border-radius-circle: 50%;
+
+    //fonts
+    --font-size-title: 1.25rem;
+    --font-size-subtitle: 1.125rem;
+    --font-size-main: 1rem;
+    --font-size-small: 0.75rem;
+
+    --font-weight-bold: 700;
+    --font-weight-semiBold: 600;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+
+    //transitions
+    --short-transition: all 0.2s ease 0s;
+    --medium-transition: all 0.3s ease 0s;
+    --long-transition: all 0.8s ease 0s;
+}
+
+
+
+// export const colors = {
+//   //White
+//   whiteTotal: "rgba(255, 255, 255, 1)",
+//   whiteAccent: "rgba(245, 245, 245, 1)",
+
+//   //Gray
+//   grayBackground: "rgba(234, 234, 234, 1)",
+//   grayAccent: "rgba(210, 210, 210, 1)",
+//   grayHover: "rgba(200, 200, 200, 1)",
+//   grayActive: "rgba(170, 170, 170, 1)",
+//   grayText: "rgba(131, 131, 131, 1)",
+//   grayScrollBar: "rgba(155, 155, 155, 1)",
+//   grayScrollBarHover: "rgba(140, 140, 140, 1)",
+//   grayScrollBarActive: "rgba(130, 130, 130, 1)",
+
+//   //Black
+//   blackTotal: "rgba(0, 0, 0, 1)",
+//   blackAccent: "rgba(16, 16, 16, 1)",
+//   blackShadow: "rgba(0, 0, 0, .1)",
+//   blackShadowHover: "rgba(0, 0, 0, .3)",
+//   blackShadowActive: "rgba(0, 0, 0, .5)",
+
+//   //Red
+//   red: "rgba(255, 0, 0, 1)",
+
+//   //Orange
+//   orange: "rgba(255, 165, 66, 1)",
+//   orangeAccent: "rgba(255, 206, 127, 1)",
+
+//   //Green
+//   green: "rgba(33, 160, 56, 1)",
+
+//   //Blue
+//   blue: "rgba(28, 28, 39, 1)",
+// };
+

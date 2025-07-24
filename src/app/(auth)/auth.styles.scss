@@ -1,0 +1,36 @@
+@use "@/common/styles/_variables.scss" as *;
+@use "@/common/styles/_mixins.scss" as *;
+
+.auth {
+    &__section {
+        @include abs-center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        row-gap: 1.25rem;
+        width: 30vw;
+        height: 75vh;
+        padding: 2.5rem;
+        background-color: var(--color-white);
+        border: var(--border-style-default);
+        border-radius: var(--border-radius-default);
+        box-shadow: var(--shadow-default);
+    }
+
+    &__form {
+        @include flex-center;
+        flex-direction: column;
+        row-gap: 0.75rem;
+        width: 100%;
+    }
+
+    &__span {
+        @include flex-center;
+
+        color: var(--color-gray-text);
+        font-size: var(--font-size-small);
+        text-align: center;
+        white-space: nowrap;
+    }
+}

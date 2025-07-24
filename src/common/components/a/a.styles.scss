@@ -1,0 +1,32 @@
+@use "@/common/styles/_variables.scss" as *;
+@use "@/common/styles/_media.scss" as *;
+
+.default-link {
+    position: relative;
+    text-align: center;
+    color: var(--color-black);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    padding: 0.2rem;
+    transition: var(--short-transition);
+
+    @include hover {
+        &::after {
+            width: 100%;
+        }
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 1px;
+        background-color: var(--color-black);
+        border-radius: var(--border-radius-default);
+        transition: inherit;
+    }
+}
