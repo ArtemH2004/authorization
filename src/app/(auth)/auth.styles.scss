@@ -33,4 +33,10 @@
         text-align: center;
         white-space: nowrap;
     }
+
+    &__error {
+        color: var(--color-red);
+        font-size: var(--font-size-small);
+        text-align: center;
+    }
 }

@@ -7,7 +7,7 @@
         @include button-hover;
 
         width: 100%;
-        padding: 0.7rem 1rem;
+        padding: 0.8rem 1rem;
         color: var(--color-white);
         background-color: var(--color-black);
         border-radius: var(--border-radius-default);
@@ -22,6 +22,6 @@
         font-size: var(--font-size-main);
         font-weight: var(--font-weight-medium);
         text-align: center;
-        line-height: 1.1;
+        line-height: 1;
     }
 }
