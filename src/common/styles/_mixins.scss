@@ -42,7 +42,7 @@
 
 @mixin square($size) {
     width: $size;
-    aspect-ratio: 1;
+    height: $size;
 }
 
 @mixin visually-hidden {
@@ -56,6 +56,19 @@
     clip-path: inset(100%) !important;
     clip: rect(0 0 0 0) !important;
     overflow: hidden !important;
+}
+
+@mixin border-hover {
+  outline: none;
+
+  &:focus-visible {
+    border: var(--border-style-black);
+    border-color: var(--color-black);
+  }
+
+  &:focus:not(:focus-visible) {
+    border: var(--border-style-default);
+  }
 }
 
 

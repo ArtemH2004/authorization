@@ -5,16 +5,50 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
-        row-gap: .3rem;
+        row-gap: 0.3rem;
         width: 100%;
+        // position: relative;
+
+        //progress bar
+        
+        // &::before,
+        // &::after {
+        //     @include square(1rem);
+
+        //     content: "";
+        //     position: absolute;
+        //     top: 0.5rem;
+        //     right: 1rem;
+        //     z-index: 1;
+        //     border: var(--border-style-default);
+        //     border-color: var(--color-black);
+        //     border-radius: var(--border-radius-circle);
+        // }
     }
 
     &__label {
-        margin-inline: .3rem auto;
+        margin-inline: 1rem auto;
     }
 
     &__input {
+        width: 100%;
         border-radius: var(--border-radius-default);
-        border: var(--border-style-black);
+        border: var(--border-style-default);
+        padding: 0.5rem 1rem;
+        color: var(--color-black);
+
+        @include border-hover;
+
+        &::placeholder {
+            color: var(--color-gray);
+        }
+
+        &--error {
+            border-color: var(--color-red);
+        }
+
+        &--disabled {
+            pointer-events: none;
+        }
     }
 }

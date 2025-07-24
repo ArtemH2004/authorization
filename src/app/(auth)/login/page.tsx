@@ -8,7 +8,7 @@ export default function Login() {
       <h1>Логин</h1>
 
       <form className="auth__form">
-        <DefaultInput />
+        <DefaultInput id="email" label="Email" placeholder="artem@gmail.com" required />
       </form>
 
       <span className="auth__span">
