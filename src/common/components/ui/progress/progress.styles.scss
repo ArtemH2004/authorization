@@ -1,0 +1,28 @@
+@use "@/common/styles/_variables.scss" as *;
+
+.circle-progress-bar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &__bg {
+    fill: none;
+    stroke: var(--color-gray);
+    opacity: 0.3;
+  }
+
+  &__fill {
+    fill: none;
+    stroke: var(--color-black);
+    stroke-linecap: round;
+    transition: var(--medium-transition);
+  }
+
+  &__text {
+    position: absolute;
+    font-size: 0.6rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+  }
+}

@@ -5,19 +5,16 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Login() {
+export default function ResetPassword() {
   const email = useInput("", validators.email);
-  const password = useInput("", validators.password);
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
-  const errors =
-    (wasSubmitted && email.error) || (wasSubmitted && password.error);
+  const errors = wasSubmitted && email.error;
 
   const handleReset = () => {
     email.reset();
-    password.reset();
     setWasSubmitted(false);
   };
 
@@ -26,9 +23,8 @@ export default function Login() {
     setWasSubmitted(true);
 
     const emailError = email.handleCheck();
-    const passwordError = password.handleCheck();
 
-    if (!emailError && !passwordError) {
+    if (!emailError) {
       return;
     }
 
@@ -41,9 +37,13 @@ export default function Login() {
 
   return (
     <section className="auth__section">
-      <h1>Вход</h1>
+      <h1>Забыли пароль?</h1>
 
       <form className="auth__form" onSubmit={handleSubmit}>
+        <p className="auth__description">
+          Для восстановления пароля на ваш Email будет отправлен код
+        </p>
+
         <DefaultInput
           id="email"
           label="Email"
@@ -55,29 +55,18 @@ export default function Login() {
           required
         />
 
-        <DefaultInput
-          id="password"
-          label="Пароль"
-          type="password"
-          placeholder="••••••"
-          value={password.value}
-          onChange={password.onChange}
-          error={!!password.error}
-          required
+        <DefaultButton
+          title="Отправить код"
+          type="submit"
+          disabled={wasSubmitted}
         />
-
-        <DefaultLink title="Забыли пароль?" linkTo="/reset-password" />
-
-        <DefaultButton title="Войти" type="submit" disabled={wasSubmitted} />
 
         {wasSubmitted && errors && (
           <span className="auth__error">{errors}</span>
         )}
       </form>
 
-      <span className="auth__span">
-        Нет аккаунта? <DefaultLink title="Регистрация" linkTo="/register" />
-      </span>
+      <DefaultLink title="Вернуться назад" linkTo="/login" />
     </section>
   );
 }

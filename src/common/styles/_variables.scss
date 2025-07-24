@@ -1,11 +1,13 @@
 :root {
     //colors
     --color-black: rgba(0, 0, 0, 1);
-    --color-shadow: rgba(0, 0, 0, .1);
-    --color-gray: rgba(175, 175, 175, 1);
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-hover: rgba(255, 255, 255, 1) --color-gray: rgba(175, 175, 175, 1);
     --color-gray-text: rgba(131, 131, 131, 1);
 
     --color-white: rgba(255, 255, 255, 1);
+
+    --color-red: rgba(255, 0, 0, 1);
 
     // font-family
     --font-family: "Montserrat", sans-serif;
@@ -15,12 +17,16 @@
     --container-padding-x: 1.25rem;
 
     //shadows
-    --shadow-default:  0 0 1.25rem 0 var(--color-shadow);
+    --shadow-default: 0 0 1.25rem 0 var(--color-shadow);
+    --shadow-button: 0 0 0 0.3rem var(--color-shadow);
 
     //borders
     --border-style-default: 1px solid var(--color-gray);
-    --border-style-black: 1px solid var(--color-black);
+    --border-style-black: 1px solid var(--color-black);    --border-style-default: 1px solid var(--color-gray);
+    --border-style-white: 1px solid var(--color-white);
 
+
+    --border-radius-small: 0.3rem;
     --border-radius-default: 1.75rem;
     --border-radius-circle: 50%;
 
@@ -28,7 +34,7 @@
     --font-size-title: 1.25rem;
     --font-size-subtitle: 1.125rem;
     --font-size-main: 1rem;
-    --font-size-small: 0.75rem;
+    --font-size-small: 0.9rem;
 
     --font-weight-bold: 700;
     --font-weight-semiBold: 600;
@@ -40,8 +46,6 @@
     --medium-transition: all 0.3s ease 0s;
     --long-transition: all 0.8s ease 0s;
 }
-
-
 
 // export const colors = {
 //   //White
@@ -78,4 +82,3 @@
 //   //Blue
 //   blue: "rgba(28, 28, 39, 1)",
 // };
-

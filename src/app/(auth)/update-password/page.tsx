@@ -2,48 +2,37 @@
 import "@/app/(auth)/auth.styles.scss";
 import { DefaultLink } from "@/common/components/ui/a/DefaultLink";
 import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
-import { CheckboxInput } from "@/common/components/ui/input/CheckboxInput";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { InputCharLimitsEnum, validators } from "@/common/utils/validators";
 import { useEffect, useState } from "react";
 
-export default function Register() {
-  const name = useInput("", validators.user_name);
-  const email = useInput("", validators.email);
+export default function UpdatePassword() {
   const password = useInput("", validators.password);
   const rPassword = useInput("", validators.password);
   const [concError, setConcError] = useState("");
-  const [isPolicy, setIsPolicy] = useState(false);
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
   const errors =
-    (wasSubmitted && name.error) ||
-    (wasSubmitted && email.error) ||
     (wasSubmitted && password.error) ||
     (wasSubmitted && rPassword.error) ||
     (wasSubmitted && concError);
 
   const handleReset = () => {
-    name.reset();
-    email.reset();
     password.reset();
     rPassword.reset();
     setConcError("");
-    setIsPolicy(false);
     setWasSubmitted(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setWasSubmitted(true);
 
-    const nameError = name.handleCheck();
-    const emailError = email.handleCheck();
     const passwordError = password.handleCheck();
     const rPasswordError = rPassword.handleCheck();
 
-    if (!nameError && !emailError && !passwordError && !rPasswordError) {
+    if (!passwordError && !rPasswordError) {
       return;
     }
 
@@ -51,41 +40,17 @@ export default function Register() {
   };
 
   useEffect(() => {
-    if (wasSubmitted)
-      if (password.value === rPassword.value) setConcError("");
-      else setConcError("Пароли не совпадают");
+    if (password.value === rPassword.value) setConcError("");
+    else setConcError("Пароли не совпадают");
 
     !errors ? setWasSubmitted(false) : setWasSubmitted(true);
   }, [rPassword, errors]);
 
   return (
     <section className="auth__section">
-      <h1>Регистрация</h1>
+      <h1>Обновление пароля</h1>
 
       <form className="auth__form" onSubmit={handleSubmit}>
-        <DefaultInput
-          id="user_name"
-          label="Имя пользователя"
-          placeholder="artem"
-          value={name.value}
-          onChange={name.onChange}
-          error={!!name.error}
-          maxLength={InputCharLimitsEnum.USER_NAME}
-          required
-        />
-
-        <DefaultInput
-          id="email"
-          label="Email"
-          type="email"
-          placeholder="artem@gmail.com"
-          value={email.value}
-          onChange={email.onChange}
-          error={!!email.error}
-          maxLength={InputCharLimitsEnum.EMAIL}
-          required
-        />
-
         <DefaultInput
           id="password"
           label="Пароль"
@@ -110,18 +75,10 @@ export default function Register() {
           required
         />
 
-        <CheckboxInput
-          id="privacy-policy"
-          title="Политика Конфиденциальности"
-          linkTo="/privacy-policy"
-          isActive={isPolicy}
-          setActive={setIsPolicy}
-        />
-
         <DefaultButton
-          title="Регистрация"
+          title="Сохранить"
           type="submit"
-          disabled={wasSubmitted && !isPolicy}
+          disabled={wasSubmitted}
         />
 
         {wasSubmitted && errors && (
@@ -129,9 +86,7 @@ export default function Register() {
         )}
       </form>
 
-      <span className="auth__span">
-        Уже есть аккаунт? <DefaultLink title="Войти" linkTo="/login" />
-      </span>
+      <DefaultLink title="Вернуться назад" linkTo="/login" />
     </section>
   );
 }

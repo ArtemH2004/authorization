@@ -1,6 +1,6 @@
 html,
 body {
-    @include clamp-text(16, 18);
+    @include clamp-text(16, 17);
 
     font-family: var(--font-family);
     font-weight: var(--font-weight-regular);

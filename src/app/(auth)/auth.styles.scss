@@ -10,8 +10,9 @@
         flex-direction: column;
         row-gap: 1.25rem;
         width: 30vw;
-        height: 75vh;
-        padding: 2.5rem;
+        height: 80vh;
+        min-height: fit-content;
+        padding: 4rem;
         background-color: var(--color-white);
         border: var(--border-style-default);
         border-radius: var(--border-radius-default);
@@ -21,7 +22,7 @@
     &__form {
         @include flex-center;
         flex-direction: column;
-        row-gap: 0.75rem;
+        row-gap: 1rem;
         width: 100%;
     }
 
@@ -32,5 +33,59 @@
         font-size: var(--font-size-small);
         text-align: center;
         white-space: nowrap;
+
+        & time {
+            padding-left: 0.3rem;
+            color: var(--color-black);
+        }
+    }
+
+    &__description {
+        text-align: center;
+    }
+
+    &__error {
+        color: var(--color-red);
+        font-size: var(--font-size-small);
+        text-align: center;
+    }
+
+    &__privacy-policy {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        row-gap: 1.25rem;
+        width: 100%;
+        padding: 2rem;
+        margin-block: 2rem;
+        background-color: var(--color-white);
+        border: var(--border-style-default);
+        border-radius: var(--border-radius-default);
+        box-shadow: var(--shadow-default);
+        line-height: 1.5;
+
+        & br {
+            padding-bottom: 0.2rem;
+        }
+
+        & ul {
+            list-style-type: none;
+        }
+
+        & li {
+            margin-bottom: 1rem;
+        }
+
+        & table {
+            border-collapse: collapse;
+        }
+
+        & th,
+        td {
+            text-align: start;
+            border: var(--border-style-default);
+            padding: 0.3rem 1rem;
+        }
     }
 }
