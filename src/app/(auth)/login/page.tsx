@@ -11,14 +11,17 @@ export default function Login() {
   const email = useInput("", validators.email);
   const password = useInput("", validators.password);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    const emailError = email.handleCheck();
-    const passwordError = password.handleCheck();
-    
-    if (!emailError && !passwordError) {
-    }
-  }, [email, password]);
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const emailError = email.handleCheck();
+      const passwordError = password.handleCheck();
+
+      if (!emailError && !passwordError) {
+      }
+    },
+    [email, password]
+  );
 
   return (
     <section className="auth__section">
@@ -35,7 +38,7 @@ export default function Login() {
           error={!!email.error}
           required
         />
-        
+
         <DefaultInput
           id="password"
           label="Пароль"
@@ -46,21 +49,22 @@ export default function Login() {
           error={!!password.error}
           required
         />
-        
+
         <DefaultLink title="Забыли пароль?" linkTo="/reset" />
 
-        <DefaultButton 
-          title="Войти" 
-          type="submit" 
-          disabled={!!email.error || !!password.error} 
+        <DefaultButton
+          title="Войти"
+          type="submit"
+          disabled={!!email.error || !!password.error}
         />
 
-        {password.error && <span className="auth__error">{email.error || password.error}</span>}
+        {password.error && (
+          <span className="auth__error">{email.error || password.error}</span>
+        )}
       </form>
 
       <span className="auth__span">
-        Нет аккаунта?{" "}
-        <DefaultLink title="Регистрация" linkTo="/register" />
+        Нет аккаунта? <DefaultLink title="Регистрация" linkTo="/register" />
       </span>
     </section>
   );

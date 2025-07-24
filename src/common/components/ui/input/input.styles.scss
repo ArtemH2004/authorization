@@ -7,23 +7,10 @@
         flex-direction: column;
         row-gap: 0.3rem;
         width: 100%;
-        // position: relative;
+    }
 
-        //progress bar
-
-        // &::before,
-        // &::after {
-        //     @include square(1rem);
-
-        //     content: "";
-        //     position: absolute;
-        //     top: 0.5rem;
-        //     right: 1rem;
-        //     z-index: 1;
-        //     border: var(--border-style-default);
-        //     border-color: var(--color-black);
-        //     border-radius: var(--border-radius-circle);
-        // }
+    &__container {
+        position: relative;
     }
 
     &__label {
@@ -36,6 +23,7 @@
         border: var(--border-style-default);
         padding: 0.5rem 1rem;
         color: var(--color-black);
+        padding-right: 2.5rem; // Добавляем место для прогресс-бара
 
         @include border-hover;
 
@@ -50,5 +38,13 @@
         &--disabled {
             pointer-events: none;
         }
+    }
+
+    &__progress-container {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        @include flex-center
     }
 }

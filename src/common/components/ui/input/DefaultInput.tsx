@@ -1,4 +1,6 @@
 import "@/common/components/ui/input/input.styles.scss";
+import { useEffect, useRef, useState } from "react";
+import { CircleProgressBar } from "@/common/components/ui/progress/CircleProgressBar";
 
 interface DefaultInputProps {
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
@@ -13,13 +15,14 @@ interface DefaultInputProps {
   autoFocus?: boolean;
   error?: boolean;
   autoComplete?: string;
+  maxLength?: number;
 }
 
 export const DefaultInput = ({
   type,
   id,
   label,
-  value,
+  value = "",
   placeholder,
   onChange,
   onKeyDown,
@@ -27,104 +30,53 @@ export const DefaultInput = ({
   autoFocus,
   error,
   autoComplete,
+  maxLength,
 }: DefaultInputProps) => {
+  const [progress, setProgress] = useState(0);
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (maxLength) {
+      setProgress((value.length / maxLength) * 100);
+    }
+  }, [value, maxLength]);
+
   return (
     <div className="default-input__wrapper">
       <label htmlFor={id} className="default-input__label">
         {label}
       </label>
-      <input
-        className={`default-input__input ${
-          disabled
-            ? "default-input__input--disabled"
-            : error
-            ? "default-input__input--error"
-            : ""
-        }`}
-        id={id}
-        type={type ?? "text"}
-        name={label}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        disabled={disabled ?? false}
-        // $isDisabled={disabled ?? false}
-        // $isError={error ?? false}
-        autoFocus={autoFocus}
-        // ref={ref}
-        autoComplete={autoComplete}
-      />
+      <div className="default-input__container" ref={inputRef}>
+        <input
+          className={`default-input__input ${
+            disabled
+              ? "default-input__input--disabled"
+              : error
+              ? "default-input__input--error"
+              : ""
+          }`}
+          id={id}
+          type={type ?? "text"}
+          name={label}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          disabled={disabled ?? false}
+          autoFocus={autoFocus}
+          autoComplete={autoComplete}
+          maxLength={maxLength}
+        />
+        {maxLength && (
+          <div className="default-input__progress-container">
+            <CircleProgressBar
+              progress={progress}
+              value={value.length}
+              maxValue={maxLength}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
-
-// import { forwardRef } from "react";
-
-// const Input = styled("input")<{
-//   $isDisabled?: boolean;
-//   $isError?: boolean;
-//   $height: number;
-// }>`
-//   width: 100%;
-//   height: ${({ $height }) => `${$height}px`};
-//   padding: 5px 10px;
-//   color: ${(props) =>
-//     props.$isDisabled ? colors.grayDark : colors.blackTotal};
-//   font-size: ${fonts.sizes.small};
-//   font-weight: ${fonts.weights.regular};
-//   line-height: 1.2;
-//   border: ${(props) =>
-//     props.$isError ? borders.styles.error : borders.styles.graySmall};
-//   border-radius: ${borders.radius.default};
-//   pointer-events: ${(props) => props.$isDisabled && "none"};
-//   ${borderHover}
-
-//   &::placeholder {
-//     color: ${colors.grayDark};
-//   }
-// `;
-
-// export const ModalInput = forwardRef<HTMLInputElement, ModalInputProps>(
-//   (
-//     {
-//       type,
-//       id,
-//       name,
-//       value,
-//       placeholder,
-//       onChange,
-//       onKeyDown,
-//       disabled,
-//       autoFocus,
-//       error,
-//       height = 30,
-//       autoComplete,
-//     },
-//     ref
-//   ) => {
-//     return (
-//       <Wrapper>
-//         <VisuallyHidden>
-//           <label htmlFor={id}>{name}</label>
-//         </VisuallyHidden>
-//         <Input
-//           id={id}
-//           type={type ?? "text"}
-//           name={name}
-//           value={value}
-//           placeholder={placeholder}
-//           onChange={onChange}
-//           onKeyDown={onKeyDown}
-//           disabled={disabled ?? false}
-//           $isDisabled={disabled ?? false}
-//           $isError={error ?? false}
-//           $height={height}
-//           autoFocus={autoFocus}
-//           ref={ref}
-//           autoComplete={autoComplete}
-//         />
-//       </Wrapper>
-//     );
-//   }
-// );
