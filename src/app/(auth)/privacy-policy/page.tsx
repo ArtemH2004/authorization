@@ -1,10 +1,14 @@
 import "@/app/(auth)/auth.styles.scss";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Политика конфиденциальности"
+};
 
 export default function PrivacyPolicy() {
   return (
     <section className="auth__privacy-policy">
       <header>
-        <title>Политика конфиденциальности</title>
         <h1>Политика в отношении обработки персональных данных</h1>
       </header>
 
