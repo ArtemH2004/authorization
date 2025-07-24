@@ -2,6 +2,7 @@
 import "@/app/(auth)/auth.styles.scss";
 import { DefaultLink } from "@/common/components/ui/a/DefaultLink";
 import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
+import { CheckboxInput } from "@/common/components/ui/input/CheckboxInput";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { InputCharLimitsEnum, validators } from "@/common/utils/validators";
@@ -83,6 +84,8 @@ export default function Register() {
           maxLength={InputCharLimitsEnum.PASSWORD}
           required
         />
+
+        <CheckboxInput id="privacy-policy" title="Политика Конфиденциальности" linkTo="/privacy-policy" />
 
         <DefaultButton
           title="Регистрация"
