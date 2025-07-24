@@ -5,19 +5,39 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
+import { useEffect, useState } from "react";
 
 export default function Login() {
   const email = useInput("", validators.email);
   const password = useInput("", validators.password);
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  const errors =
+    (wasSubmitted && email.error) || (wasSubmitted && password.error);
+
+  const handleReset = () => {
+    email.reset();
+    password.reset();
+    setWasSubmitted(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWasSubmitted(true);
+
     const emailError = email.handleCheck();
     const passwordError = password.handleCheck();
 
     if (!emailError && !passwordError) {
+      return;
     }
+
+    handleReset();
   };
+
+  useEffect(() => {
+    !errors ? setWasSubmitted(false) : setWasSubmitted(true);
+  }, [errors]);
 
   return (
     <section className="auth__section">
@@ -48,14 +68,10 @@ export default function Login() {
 
         <DefaultLink title="Забыли пароль?" linkTo="/reset-password" />
 
-        <DefaultButton
-          title="Войти"
-          type="submit"
-          disabled={!!email.error || !!password.error}
-        />
+        <DefaultButton title="Войти" type="submit" disabled={wasSubmitted} />
 
-        {password.error && (
-          <span className="auth__error">{email.error || password.error}</span>
+        {wasSubmitted && errors && (
+          <span className="auth__error">{errors}</span>
         )}
       </form>
 

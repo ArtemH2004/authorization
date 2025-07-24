@@ -15,23 +15,48 @@ export default function Register() {
   const rPassword = useInput("", validators.password);
   const [concError, setConcError] = useState("");
   const [isPolicy, setIsPolicy] = useState(false);
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  const errors =
+    (wasSubmitted && name.error) ||
+    (wasSubmitted && email.error) ||
+    (wasSubmitted && password.error) ||
+    (wasSubmitted && rPassword.error) ||
+    (wasSubmitted && concError);
+
+  const handleReset = () => {
+    name.reset();
+    email.reset();
+    password.reset();
+    rPassword.reset();
+    setConcError("");
+    setIsPolicy(false);
+    setWasSubmitted(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWasSubmitted(true);
+
     const nameError = name.handleCheck();
     const emailError = email.handleCheck();
     const passwordError = password.handleCheck();
     const rPasswordError = rPassword.handleCheck();
 
     if (!nameError && !emailError && !passwordError && !rPasswordError) {
-        return;
+      return;
     }
+
+    handleReset();
   };
 
   useEffect(() => {
-    if (password.value === rPassword.value) setConcError("");
-    else setConcError("Пароли не совпадают");
-  }, [rPassword]);
+    if (wasSubmitted)
+      if (password.value === rPassword.value) setConcError("");
+      else setConcError("Пароли не совпадают");
+
+    !errors ? setWasSubmitted(false) : setWasSubmitted(true);
+  }, [rPassword, errors]);
 
   return (
     <section className="auth__section">
@@ -85,16 +110,22 @@ export default function Register() {
           required
         />
 
-        <CheckboxInput id="privacy-policy" title="Политика Конфиденциальности" linkTo="/privacy-policy" />
+        <CheckboxInput
+          id="privacy-policy"
+          title="Политика Конфиденциальности"
+          linkTo="/privacy-policy"
+          isActive={isPolicy}
+          setActive={setIsPolicy}
+        />
 
         <DefaultButton
           title="Регистрация"
           type="submit"
-          disabled={!!email.error || !!password.error}
+          disabled={wasSubmitted && !isPolicy}
         />
 
-        {password.error && (
-          <span className="auth__error">{name.error || email.error || password.error || rPassword.error || concError}</span>
+        {wasSubmitted && errors && (
+          <span className="auth__error">{errors}</span>
         )}
       </form>
 

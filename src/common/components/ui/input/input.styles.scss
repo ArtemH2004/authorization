@@ -107,6 +107,10 @@
         transition: background-color 0.3s;
         box-shadow: var(--shadow-default);
 
+        &--error {
+            border-color: var(--color-red);
+        }
+
         &::after {
             @include square(0.4rem);
 

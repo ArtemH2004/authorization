@@ -5,15 +5,28 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
+import { useEffect, useState } from "react";
 
 export default function ConfirmCode() {
   const code = useInput("", validators.code);
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  const errors = wasSubmitted && code.error;
+
+  const handleReset = () => {
+    code.reset();
+    setWasSubmitted(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWasSubmitted(true);
 
     if (!code.handleCheck()) {
+      return;
     }
+
+    handleReset();
   };
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +40,10 @@ export default function ConfirmCode() {
 
     code.handleChange(value);
   };
+
+  useEffect(() => {
+    !errors ? setWasSubmitted(false) : setWasSubmitted(true);
+  }, [errors]);
 
   return (
     <section className="auth__section">
@@ -57,10 +74,12 @@ export default function ConfirmCode() {
         <DefaultButton
           title="Подтвердить"
           type="submit"
-          disabled={!!code.error}
+          disabled={wasSubmitted}
         />
 
-        {code.error && <span className="auth__error">{code.error}</span>}
+        {wasSubmitted && errors && (
+          <span className="auth__error">{errors}</span>
+        )}
       </form>
 
       <DefaultLink title="Вернуться назад" linkTo="/login" />

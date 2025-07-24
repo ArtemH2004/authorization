@@ -5,17 +5,35 @@ import { DefaultButton } from "@/common/components/ui/button/DefaultButton";
 import { DefaultInput } from "@/common/components/ui/input/DefaultInput";
 import useInput from "@/common/hooks/useInput";
 import { validators } from "@/common/utils/validators";
+import { useState, useEffect } from "react";
 
 export default function ResetPassword() {
   const email = useInput("", validators.email);
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  const errors = wasSubmitted && email.error;
+
+  const handleReset = () => {
+    email.reset();
+    setWasSubmitted(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWasSubmitted(true);
+
     const emailError = email.handleCheck();
 
     if (!emailError) {
+      return;
     }
+
+    handleReset();
   };
+
+  useEffect(() => {
+    !errors ? setWasSubmitted(false) : setWasSubmitted(true);
+  }, [errors]);
 
   return (
     <section className="auth__section">
@@ -40,10 +58,12 @@ export default function ResetPassword() {
         <DefaultButton
           title="Отправить код"
           type="submit"
-          disabled={!!email.error}
+          disabled={wasSubmitted}
         />
 
-        {email.error && <span className="auth__error">{email.error}</span>}
+        {wasSubmitted && errors && (
+          <span className="auth__error">{errors}</span>
+        )}
       </form>
 
       <DefaultLink title="Вернуться назад" linkTo="/login" />

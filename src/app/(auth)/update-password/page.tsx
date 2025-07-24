@@ -11,20 +11,40 @@ export default function UpdatePassword() {
   const password = useInput("", validators.password);
   const rPassword = useInput("", validators.password);
   const [concError, setConcError] = useState("");
+  const [wasSubmitted, setWasSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const errors =
+    (wasSubmitted && password.error) ||
+    (wasSubmitted && rPassword.error) ||
+    (wasSubmitted && concError);
+
+  const handleReset = () => {
+    password.reset();
+    rPassword.reset();
+    setConcError("");
+    setWasSubmitted(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWasSubmitted(true);
+
     const passwordError = password.handleCheck();
     const rPasswordError = rPassword.handleCheck();
 
     if (!passwordError && !rPasswordError) {
+      return;
     }
+
+    handleReset();
   };
 
   useEffect(() => {
     if (password.value === rPassword.value) setConcError("");
     else setConcError("Пароли не совпадают");
-  }, [rPassword]);
+
+    !errors ? setWasSubmitted(false) : setWasSubmitted(true);
+  }, [rPassword, errors]);
 
   return (
     <section className="auth__section">
@@ -58,10 +78,12 @@ export default function UpdatePassword() {
         <DefaultButton
           title="Сохранить"
           type="submit"
-          disabled={!!password.error || !rPassword.error}
+          disabled={wasSubmitted}
         />
 
-        {password.error && <span className="auth__error">{password.error}</span>}
+        {wasSubmitted && errors && (
+          <span className="auth__error">{errors}</span>
+        )}
       </form>
 
       <DefaultLink title="Вернуться назад" linkTo="/login" />
