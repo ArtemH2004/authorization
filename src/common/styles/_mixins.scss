@@ -59,18 +59,56 @@
 }
 
 @mixin border-hover {
-  outline: none;
+    outline: none;
 
-  &:focus-visible {
-    border: var(--border-style-black);
-    border-color: var(--color-black);
-  }
+    &:focus-visible {
+        border: var(--border-style-black);
+        border-color: var(--color-black);
+    }
 
-  &:focus:not(:focus-visible) {
-    border: var(--border-style-default);
-  }
+    &:focus:not(:focus-visible) {
+        border: var(--border-style-default);
+    }
 }
 
+@mixin button-hover {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            opacity: 0.8;
+            box-shadow: var(--shadow-button);
+        }
+
+        &:active {
+            opacity: 0.65;
+            box-shadow: none;
+        }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+        &:active {
+            opacity: 0.65;
+        }
+    }
+}
+
+@mixin opacity-hover {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover,
+        &:active {
+            opacity: 0.8;
+        }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+        &:active {
+            opacity: 0.8;
+        }
+
+        &:not(:active) {
+            opacity: 1;
+        }
+    }
+}
 
 // @mixin scrollBar {
 //   ::-webkit-scrollbar-track {

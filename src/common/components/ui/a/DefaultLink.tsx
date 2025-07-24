@@ -1,4 +1,4 @@
-import "@/common/components/a/a.styles.scss";
+import "@/common/components/ui/a/a.styles.scss";
 import Link from "next/link";
 
 interface DefaultLinkProps { 

@@ -1,4 +1,4 @@
-import "@/common/components/input/input.styles.scss";
+import "@/common/components/ui/input/input.styles.scss";
 
 interface DefaultInputProps {
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
