@@ -59,7 +59,7 @@ export const Login = () => {
           id="password"
           label="Пароль"
           type="password"
-          placeholder="••••••"
+          placeholder="••••••••"
           value={password.value}
           onChange={password.onChange}
           error={!!password.error}

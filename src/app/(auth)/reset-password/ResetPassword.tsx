@@ -56,6 +56,8 @@ export const ResetPassword = () => {
           required
         />
 
+        <div />
+
         <DefaultButton
           title="Отправить код"
           type="submit"

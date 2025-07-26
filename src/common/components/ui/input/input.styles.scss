@@ -105,8 +105,7 @@
         border: var(--border-style-default);
         border-radius: var(--border-radius-small);
         transition: background-color 0.3s;
-        box-shadow: var(--shadow-default);
-
+        
         &--error {
             border-color: var(--color-red);
         }

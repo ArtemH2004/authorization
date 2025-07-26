@@ -90,7 +90,7 @@ export const Register = () => {
           id="password"
           label="Пароль"
           type="password"
-          placeholder="••••••"
+          placeholder="••••••••"
           value={password.value}
           onChange={password.onChange}
           error={!!password.error}
@@ -102,7 +102,7 @@ export const Register = () => {
           id="rPassword"
           label="Повторите пароль"
           type="password"
-          placeholder="••••••"
+          placeholder="••••••••"
           value={rPassword.value}
           onChange={rPassword.onChange}
           error={!!rPassword.error}
