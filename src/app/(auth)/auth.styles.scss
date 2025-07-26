@@ -1,5 +1,6 @@
 @use "@/common/styles/_variables.scss" as *;
 @use "@/common/styles/_mixins.scss" as *;
+@use "@/common/styles/_media.scss" as *;
 
 .auth {
     &__section {
@@ -9,7 +10,8 @@
         justify-content: space-between;
         flex-direction: column;
         row-gap: 1.25rem;
-        width: 30vw;
+        width: 35vw;
+        min-width: fit-content;
         height: 80vh;
         min-height: fit-content;
         padding: 4rem;
@@ -17,6 +19,26 @@
         border: var(--border-style-default);
         border-radius: var(--border-radius-default);
         box-shadow: var(--shadow-default);
+
+        @include tablet {
+            width: 60vw;
+        }
+
+        @include mobile {
+            width: 70vw;
+            padding: 3rem;
+        }
+
+        @include mobile-l {
+            width: 80vw;
+            padding: 3rem 2rem;
+        }
+
+        @include mobile-m {
+            width: 90vw;
+            height: 75vh;
+            padding: 2rem 1rem;
+        }
     }
 
     &__form {
@@ -64,6 +86,19 @@
         border-radius: var(--border-radius-default);
         box-shadow: var(--shadow-default);
         line-height: 1.5;
+
+        @include mobile {
+            padding-inline: 1.5rem;
+        }
+
+        @include mobile-l {
+            padding: 1rem;
+            margin-block: 1rem;
+
+            & h1 {
+                text-align: center;
+            }
+        }
 
         & br {
             padding-bottom: 0.2rem;
